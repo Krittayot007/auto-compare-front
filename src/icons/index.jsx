@@ -22,7 +22,7 @@ export function FacebookIcon({ className = null }) {
   );
 }
 
-export function LineIcon() {
+export function LineIcon({ className = null }) {
   return (
     <svg
       fill="#000000"
@@ -31,6 +31,7 @@ export function LineIcon() {
       xmlns="http://www.w3.org/2000/svg"
       width="2.5rem"
       height="2.5rem"
+      className={className}
     >
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
       <g

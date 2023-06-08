@@ -8,7 +8,6 @@ html {
   font-family: "Roboto Slab", serif;
 }
 
-/* body {
-  min-height: 100%;
-  height: 100vh;
-} */
+body {
+  background-color: #f2efdf;
+}

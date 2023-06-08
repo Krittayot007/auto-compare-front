@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AddProduct from "../pages/AddProduct";
 import UpdateProduct from "../pages/UpdateProduct";
+import { Navebar } from "../pages/NaveBar";
 
 export default function Router() {
   const router = createBrowserRouter([
