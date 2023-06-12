@@ -1,12 +1,11 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import Header from "../pages/Header";
 import Home from "../pages/Home";
-import Footer from "../pages/Footer";
+import Footer from "../components/Footer";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AddProduct from "../pages/AddProduct";
 import UpdateProduct from "../pages/UpdateProduct";
-import { Navebar } from "../pages/NaveBar";
+import Header from "../components/Header";
 
 export default function Router() {
   const router = createBrowserRouter([
@@ -14,6 +13,7 @@ export default function Router() {
       path: "/",
       element: (
         <>
+          <Header />
           <Outlet />
           <Footer />
         </>

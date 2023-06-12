@@ -42,7 +42,7 @@ export function Navebar() {
           <form className="mb-0 hidden lg:flex">
             <div className="relative">
               <input
-                className="h-10 rounded-lg border-gray-200 pe-10 text-sm placeholder-gray-300 focus:z-10"
+                className="h-10 rounded-lg border-gray-200 pe-10 text-sm placeholder-gray-300 focus:z-10 p-4"
                 placeholder="Search..."
                 type="text"
               />
@@ -95,13 +95,7 @@ export function Navebar() {
           className="hidden items-center justify-center gap-8 text-sm font-medium lg:flex lg:w-0 lg:flex-1"
         >
           <a className="text-gray-900" href="">
-            About
-          </a>
-          <a className="text-gray-900" href="">
-            Blog
-          </a>
-          <a className="text-gray-900" href="">
-            Projects
+            About Us
           </a>
           <a className="text-gray-900" href="">
             Contact
@@ -110,15 +104,15 @@ export function Navebar() {
 
         <div className="hidden items-center gap-4 lg:flex">
           <a
-            href="#"
-            className="rounded-lg bg-gray-100 px-5 py-2 text-sm font-medium text-gray-600"
+            href="/login"
+            className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
           >
             Log in
           </a>
 
           <a
-            href="#"
-            className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white"
+            href="/register"
+            className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
           >
             Sign up
           </a>

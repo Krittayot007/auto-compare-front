@@ -20,7 +20,7 @@ export default function AuthContextProvider(props) {
   }, []);
 
   const logout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("accesstoken");
     setUser(null);
   };
 
