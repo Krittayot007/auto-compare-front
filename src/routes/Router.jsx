@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AddProduct from "../pages/AddProduct";
-import UpdateProduct from "../pages/UpdateProduct";
+import EditProduct from "../pages/EditProduct";
 import Header from "../components/Header";
 import ProductDetail from "../pages/ProductDetail";
 
@@ -23,9 +23,9 @@ export default function Router() {
         { index: true, element: <Home /> },
         { path: "/login", element: <Login /> },
         { path: "/register", element: <Register /> },
-        { path: "/productDetail", element: <ProductDetail /> },
+        { path: "/productDetail/:id", element: <ProductDetail /> },
         { path: "/addProduct", element: <AddProduct /> },
-        { path: "/updateProduct", element: <UpdateProduct /> },
+        { path: "/editProduct/:id", element: <EditProduct /> },
         { path: "/logout", element: <div className="text-xl">Logout</div> },
         {
           path: "*",

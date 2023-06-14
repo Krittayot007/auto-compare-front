@@ -12,3 +12,13 @@ export const uploadProduct = (id, files) => {
 };
 
 export const searchProduct = (input) => axios.post("/product/search", input);
+
+export const getProductById = (id) => axios.get(`/product/fetch/${id}`);
+
+export const editProduct = (id, value) =>
+  axios.patch(`/admin/updateProduct/${id}`, value);
+
+export const deleteFileProduct = (id) =>
+  axios.delete(`/admin/deleteFile/${id}`);
+
+export const deleteProduct = (id) => axios.delete(`/admin/delete/${id}`);

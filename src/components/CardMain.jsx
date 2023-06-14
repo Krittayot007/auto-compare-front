@@ -1,7 +1,7 @@
 import m4 from "../assets/bmw-m4_02.jpg";
 
-export default function CardMain({ img, brand, description }) {
-  console.log(img, brand, description);
+export default function CardMain({ img, brand, description, model }) {
+  // console.log(img, brand, description);
   return (
     <div>
       <a href="#" className="block">
@@ -15,12 +15,12 @@ export default function CardMain({ img, brand, description }) {
         ))} */}
         <img
           alt="Art"
-          src={img.imgUrl}
+          src={img?.imgUrl}
           className="h-44 w-full object-cover sm:h-64 lg:h-80"
         />
 
         <h3 className="mt-4 text-lg font-bold text-gray-900 sm:text-xl">
-          {brand.name}
+          {brand?.name} {model}
         </h3>
 
         <p className="mt-2 max-w-sm text-gray-700">{description}</p>

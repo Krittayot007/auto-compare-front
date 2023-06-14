@@ -4,10 +4,10 @@ import Carousel from "../components/Carousel";
 import { useProduct } from "../hooks/useProduct";
 
 export default function Home() {
-  const { product, fetchProduct } = useProduct();
+  const { product, getAllProduct } = useProduct();
 
   useEffect(() => {
-    fetchProduct();
+    getAllProduct();
   }, []);
 
   return (

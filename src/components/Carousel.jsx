@@ -1,19 +1,23 @@
 import mockModels from "../assets/2017-Tesla-Model-S.jpg";
 import CardMain from "./CardMain";
+import { Link } from "react-router-dom";
 
 export default function Carousel({ product }) {
   return (
     <div className="carousel w-full h-auto fill-[#24274C]">
       <div id="slide1" className="carousel-item relative w-full">
         <div className="flex mx-auto gap-20">
-          {product.map((el, id) => {
+          {product.map((el, idx) => {
             return (
-              <CardMain
-                key={id}
-                img={el.Images[0]}
-                brand={el.Brand}
-                description={el.description}
-              />
+              <Link to={`/productDetail/${el.id}`}>
+                <CardMain
+                  key={idx}
+                  img={el.Images[0]}
+                  brand={el.Brand}
+                  description={el.description}
+                  model={el.model}
+                />
+              </Link>
             );
           })}
         </div>

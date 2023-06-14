@@ -1,35 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Dropdown from "../components/Dropdown";
-import { addProduct, uploadProduct } from "../api/public-api";
+import {
+  uploadProduct,
+  editProduct,
+  deleteFileProduct,
+} from "../api/public-api";
+import { useProduct } from "../hooks/useProduct";
 
-export default function AddProduct() {
-  const [input, setInput] = useState({
-    brandId: "",
-    engineId: "",
-    model: "",
-    typeId: "",
-    // segment: "",
-    // seat: "",
-    description: "",
-    linkYoutube: "",
-    linkPartner: "",
-    price: "",
-    discount: "",
-  });
+export default function EditProduct() {
+  const { fetchProduct, getProductByNumber } = useProduct();
+  const { id } = useParams();
 
+  useEffect(() => {
+    getProductByNumber(id);
+    setInput({
+      brandId: fetchProduct?.Brand?.id,
+      engineId: fetchProduct?.EngineType?.id,
+      model: fetchProduct?.model,
+      typeId: fetchProduct?.TypeCar?.id,
+      // segment: "",
+      // seat: "",
+      description: fetchProduct?.description,
+      linkYoutube: fetchProduct?.linkYoutube,
+      linkPartner: fetchProduct?.linkPartner,
+      price: fetchProduct?.price,
+      discount: fetchProduct?.discount,
+    });
+  }, []);
+
+  const [input, setInput] = useState({});
   const [file, setFile] = useState([]);
 
   const handleChangeInput = (e) => {
+    // console.log(e.target.name);
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const product = await addProduct(input);
-      const formdata = new FormData();
-      formdata.append("imgUrl", file[0]);
-      const image = await uploadProduct(product.data.id, formdata);
+      const product = await editProduct(id, input);
+
+      if (file.length > 0) {
+        const deleteFile = await deleteFileProduct(id);
+        const formdata = new FormData();
+        formdata.append("imgUrl", file[0]);
+        const image = await uploadProduct(id, formdata);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -72,6 +90,7 @@ export default function AddProduct() {
             <input
               type="text"
               name="model"
+              value={input?.model}
               className="outline outline-slate-300 rounded bg-[#F1EFDF] p-2 flex-auto"
               onChange={handleChangeInput}
               placeholder="model"
@@ -79,6 +98,7 @@ export default function AddProduct() {
             <input
               type="text"
               name="typeId"
+              value={input?.TypeCar?.id}
               className="outline outline-slate-300 rounded bg-[#F1EFDF] p-2 flex-auto"
               onChange={handleChangeInput}
               placeholder="typeId"
@@ -103,6 +123,7 @@ export default function AddProduct() {
           <input
             type="text"
             name="description"
+            value={input?.description}
             className="outline outline-slate-300 rounded bg-[#F1EFDF] p-2 flex-1 h-36"
             onChange={handleChangeInput}
             placeholder="description"
@@ -112,6 +133,7 @@ export default function AddProduct() {
           <input
             type="text"
             name="linkYoutube"
+            value={input?.linkYoutube}
             className="outline outline-slate-300 rounded bg-[#F1EFDF] p-2 flex-1"
             onChange={handleChangeInput}
             placeholder="youtube"
@@ -119,6 +141,7 @@ export default function AddProduct() {
           <input
             type="text"
             name="linkPartner"
+            value={input?.linkPartner}
             className="outline outline-slate-300 rounded bg-[#F1EFDF] p-2 flex-1"
             onChange={handleChangeInput}
             placeholder="partner"
@@ -133,6 +156,7 @@ export default function AddProduct() {
           <input
             type="text"
             name="discount"
+            value={input?.discount}
             className="outline outline-slate-300 rounded bg-[#F1EFDF] p-2"
             onChange={handleChangeInput}
             placeholder="discount"
@@ -140,6 +164,7 @@ export default function AddProduct() {
           <input
             type="text"
             name="price"
+            value={input?.price}
             className="outline outline-slate-300 rounded bg-[#F1EFDF] p-2"
             onChange={handleChangeInput}
             placeholder="price"
