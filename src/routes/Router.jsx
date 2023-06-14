@@ -6,6 +6,7 @@ import Register from "../pages/Register";
 import AddProduct from "../pages/AddProduct";
 import UpdateProduct from "../pages/UpdateProduct";
 import Header from "../components/Header";
+import ProductDetail from "../pages/ProductDetail";
 
 export default function Router() {
   const router = createBrowserRouter([
@@ -22,6 +23,7 @@ export default function Router() {
         { index: true, element: <Home /> },
         { path: "/login", element: <Login /> },
         { path: "/register", element: <Register /> },
+        { path: "/productDetail", element: <ProductDetail /> },
         { path: "/addProduct", element: <AddProduct /> },
         { path: "/updateProduct", element: <UpdateProduct /> },
         { path: "/logout", element: <div className="text-xl">Logout</div> },

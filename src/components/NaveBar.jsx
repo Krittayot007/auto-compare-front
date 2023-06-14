@@ -20,7 +20,7 @@ export function Navebar() {
               className="h-5 w-5"
               fill="none"
               stroke="currentColor"
-              viewbox="0 0 24 24"
+              viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
@@ -55,7 +55,7 @@ export function Navebar() {
                 <svg
                   className="h-5 w-5"
                   fill="currentColor"
-                  viewbox="0 0 20 20"
+                  viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
@@ -78,7 +78,7 @@ export function Navebar() {
             <svg
               className="h-5 w-5"
               fill="currentColor"
-              viewbox="0 0 20 20"
+              viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
