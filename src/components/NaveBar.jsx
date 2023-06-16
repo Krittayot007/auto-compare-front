@@ -1,12 +1,9 @@
-{
-  /*
-  Heads up! 👋
+import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
-  Plugins:
-    - @tailwindcss/forms
-*/
-}
 export function Navebar() {
+  const { user, logout } = useAuth();
+
   return (
     <header className="shadow-sm">
       <div className="mx-auto flex h-16 max-w-screen-xl items-center justify-between px-4">
@@ -94,6 +91,11 @@ export function Navebar() {
           aria-label="Global"
           className="hidden items-center justify-center gap-8 text-sm font-medium lg:flex lg:w-0 lg:flex-1"
         >
+          <Link to="/addProduct">
+            <button className="text-gray-900" type="button">
+              Addproduct
+            </button>
+          </Link>
           <a className="text-gray-900" href="">
             About Us
           </a>
@@ -103,19 +105,38 @@ export function Navebar() {
         </nav>
 
         <div className="hidden items-center gap-4 lg:flex">
-          <a
-            href="/login"
-            className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
-          >
-            Log in
-          </a>
+          {user ? (
+            <>
+              <div className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500">
+                {user?.firstName}
+              </div>
+              <Link to="/">
+                <button
+                  type="button"
+                  className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
+                  onClick={() => logout()}
+                >
+                  Logout
+                </button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <a
+                href="/login"
+                className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
+              >
+                Log in
+              </a>
 
-          <a
-            href="/register"
-            className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
-          >
-            Sign up
-          </a>
+              <a
+                href="/register"
+                className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
+              >
+                Sign up
+              </a>
+            </>
+          )}
         </div>
       </div>
 
@@ -123,17 +144,12 @@ export function Navebar() {
         <ul className="flex items-center justify-center overflow-x-auto p-4 text-sm font-medium">
           <li>
             <a className="shrink-0 px-4 text-gray-900" href="">
-              About
+              About us
             </a>
           </li>
           <li>
-            <a className="shrink-0 px-4 text-gray-900" href="">
-              Blog
-            </a>
-          </li>
-          <li>
-            <a className="shrink-0 px-4 text-gray-900" href="">
-              Projects
+            <a className="shrink-0 px-4 text-gray-900" href="/addProduct">
+              Addproduct
             </a>
           </li>
           <li>

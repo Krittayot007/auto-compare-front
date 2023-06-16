@@ -2,9 +2,11 @@ import { useState } from "react";
 import logo from "../assets/auto-compare.png";
 import { useAuth } from "../hooks/useAuth";
 import { login, getMe } from "../api/auth-api";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const { user, setUser } = useAuth();
+  const navigate = useNavigate();
 
   const [input, setInput] = useState({
     email: "",
@@ -23,6 +25,7 @@ export default function Login() {
 
       const meResponse = await getMe(loginResponse.data.accessToken);
       setUser(meResponse.data.user);
+      navigate("/");
     } catch (err) {
       alert(err.response.data.error);
     }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { register } from "../api/auth-api";
 import logo from "../assets/auto-compare.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [input, setInput] = useState({
@@ -11,6 +12,7 @@ export default function Register() {
     password: "",
     confirmPassword: "",
   });
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     const { firstName, lastName, email, mobile, password, confirmPassword } =
@@ -29,7 +31,9 @@ export default function Register() {
         password,
         confirmPassword,
       });
+
       alert("Successfully");
+      navigate("/login");
     } catch (error) {
       console.log(error);
     }

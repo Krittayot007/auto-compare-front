@@ -3,7 +3,7 @@ import m4 from "../assets/bmw-m4_02.jpg";
 export default function CardMain({ img, brand, description, model }) {
   // console.log(img, brand, description);
   return (
-    <div>
+    <div className="outline outline-stone-700 p-4">
       <a href="#" className="block">
         {/* {img?.map((el, id) => (
           <img

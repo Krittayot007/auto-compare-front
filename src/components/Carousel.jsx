@@ -1,13 +1,11 @@
 import mockModels from "../assets/2017-Tesla-Model-S.jpg";
-import CardMain from "./CardMain";
-import { Link } from "react-router-dom";
 
 export default function Carousel({ product }) {
   return (
     <div className="carousel w-full h-auto fill-[#24274C]">
       <div id="slide1" className="carousel-item relative w-full">
         <div className="flex mx-auto gap-20">
-          {product.map((el, idx) => {
+          {/* {product.map((el, idx) => {
             return (
               <Link to={`/productDetail/${el.id}`}>
                 <CardMain
@@ -19,8 +17,10 @@ export default function Carousel({ product }) {
                 />
               </Link>
             );
-          })}
+          })} */}
+          <img src={mockModels} alt="mock" />
         </div>
+
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
           <a href="#slide4" className="btn btn-circle">
             ❮
@@ -31,7 +31,7 @@ export default function Carousel({ product }) {
         </div>
       </div>
       <div id="slide2" className="carousel-item relative w-full">
-        <div>
+        <div className="flex mx-auto gap-20">
           <img src={mockModels} className="w-full" />
         </div>
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -44,7 +44,7 @@ export default function Carousel({ product }) {
         </div>
       </div>
       <div id="slide3" className="carousel-item relative w-full">
-        <div>
+        <div className="flex mx-auto gap-20">
           <img src={mockModels} className="w-full" />
         </div>
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -57,7 +57,7 @@ export default function Carousel({ product }) {
         </div>
       </div>
       <div id="slide4" className="carousel-item relative w-full">
-        <div>
+        <div className="flex mx-auto gap-20">
           <img src={mockModels} className="w-full" />
         </div>
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">

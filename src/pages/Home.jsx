@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import CardProductLong from "../components/CardProduct";
+import CardMain from "../components/CardMain";
 import Carousel from "../components/Carousel";
 import { useProduct } from "../hooks/useProduct";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const { product, getAllProduct } = useProduct();
@@ -13,11 +14,20 @@ export default function Home() {
   return (
     <div>
       <Carousel product={product} />
-      <div className="flex flex-col items-center w-[80%] mx-auto gap-6 p-6">
-        <CardProductLong />
-        <CardProductLong />
-        <CardProductLong />
-        <CardProductLong />
+      <div className="grid grid-cols-2 gap-6 p-6">
+        {product.map((el, idx) => {
+          return (
+            <Link to={`/productDetail/${el.id}`}>
+              <CardMain
+                key={idx}
+                img={el.Images[0]}
+                brand={el.Brand}
+                description={el.description}
+                model={el.model}
+              />
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import AddProduct from "../pages/AddProduct";
 import EditProduct from "../pages/EditProduct";
 import Header from "../components/Header";
 import ProductDetail from "../pages/ProductDetail";
+import ProtectedRoute from "../components/ProtectRoute";
 
 export default function Router() {
   const router = createBrowserRouter([
@@ -24,8 +25,22 @@ export default function Router() {
         { path: "/login", element: <Login /> },
         { path: "/register", element: <Register /> },
         { path: "/productDetail/:id", element: <ProductDetail /> },
-        { path: "/addProduct", element: <AddProduct /> },
-        { path: "/editProduct/:id", element: <EditProduct /> },
+        {
+          path: "/addProduct",
+          element: (
+            <ProtectedRoute>
+              <AddProduct />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/editProduct/:id",
+          element: (
+            <ProtectedRoute>
+              <EditProduct />
+            </ProtectedRoute>
+          ),
+        },
         { path: "/logout", element: <div className="text-xl">Logout</div> },
         {
           path: "*",

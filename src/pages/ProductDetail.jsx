@@ -25,7 +25,7 @@ export default function Product() {
             return <img src={el.imgUrl} key={ind} />;
           })}
         </div>
-        <div className="flex flex-1 flex-col items-center my-4 gap-4">
+        <div className="flex flex-1 flex-col justify-center items-center my-4 gap-4">
           <h1>Brand: {fetchProduct?.Brand?.name}</h1>
           <h1>Model: {fetchProduct?.model}</h1>
           <h2>Type: {fetchProduct?.TypeCar?.type}</h2>
@@ -53,13 +53,15 @@ export default function Product() {
         >
           Home
         </a>
-        <button
-          className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
-          type="button"
-          onClick={deleteProductById}
-        >
-          Delete
-        </button>
+        <Link to="/">
+          <button
+            className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
+            type="button"
+            onClick={deleteProductById}
+          >
+            Delete
+          </button>
+        </Link>
       </div>
     </div>
   );

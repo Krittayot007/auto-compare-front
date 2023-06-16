@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import { getMe } from "../api/auth-api";
 
 export const AuthContext = createContext();
@@ -12,18 +12,18 @@ export default function AuthContextProvider(props) {
 
     const fetchMe = async () => {
       const res = await getMe(accessToken);
-      console.log(res.data);
-      setUser(res.data);
+
+      setUser(res.data.user);
     };
 
     fetchMe();
   }, []);
 
   const logout = () => {
-    localStorage.removeItem("accesstoken");
+    localStorage.removeItem("accessToken");
     setUser(null);
   };
-
+  console.log("last", user);
   return (
     <AuthContext.Provider value={{ user, setUser, logout }}>
       {props.children}

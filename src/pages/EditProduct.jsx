@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Dropdown from "../components/Dropdown";
 import {
   uploadProduct,
@@ -11,6 +11,7 @@ import { useProduct } from "../hooks/useProduct";
 export default function EditProduct() {
   const { fetchProduct, getProductByNumber } = useProduct();
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getProductByNumber(id);
@@ -48,6 +49,7 @@ export default function EditProduct() {
         formdata.append("imgUrl", file[0]);
         const image = await uploadProduct(id, formdata);
       }
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
