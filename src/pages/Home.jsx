@@ -10,7 +10,6 @@ export default function Home() {
   useEffect(() => {
     getAllProduct();
   }, []);
-
   return (
     <div>
       <Carousel product={product} />

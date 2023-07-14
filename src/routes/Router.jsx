@@ -5,9 +5,11 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AddProduct from "../pages/AddProduct";
 import EditProduct from "../pages/EditProduct";
+import UserProfile from "../pages/UserProfile";
 import Header from "../components/Header";
 import ProductDetail from "../pages/ProductDetail";
 import ProtectedRoute from "../components/ProtectRoute";
+import ProtectedRouteAdmin from "../components/ProtectRouteAdmin";
 
 export default function Router() {
   const router = createBrowserRouter([
@@ -24,21 +26,36 @@ export default function Router() {
         { index: true, element: <Home /> },
         { path: "/login", element: <Login /> },
         { path: "/register", element: <Register /> },
-        { path: "/productDetail/:id", element: <ProductDetail /> },
+        {
+          path: "/productDetail/:id",
+          element: (
+            <ProtectedRoute>
+              <ProductDetail />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/userProfile/:id",
+          element: (
+            <ProtectedRoute>
+              <UserProfile />
+            </ProtectedRoute>
+          ),
+        },
         {
           path: "/addProduct",
           element: (
-            <ProtectedRoute>
+            <ProtectedRouteAdmin>
               <AddProduct />
-            </ProtectedRoute>
+            </ProtectedRouteAdmin>
           ),
         },
         {
           path: "/editProduct/:id",
           element: (
-            <ProtectedRoute>
+            <ProtectedRouteAdmin>
               <EditProduct />
-            </ProtectedRoute>
+            </ProtectedRouteAdmin>
           ),
         },
         { path: "/logout", element: <div className="text-xl">Logout</div> },

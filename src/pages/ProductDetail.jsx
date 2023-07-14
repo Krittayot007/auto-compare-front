@@ -1,12 +1,43 @@
 import { useProduct } from "../hooks/useProduct";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 import { deleteProduct } from "../api/public-api";
+import { createOrDeleteWishList } from "../api/user-api";
+import { fetchWishListByProductId } from "../api/user-api";
 
 export default function Product() {
   const { fetchProduct, getProductByNumber } = useProduct();
+  const [checkFav, setCheckFav] = useState(false);
+  const { user } = useAuth();
   const { id } = useParams();
+
+  const addWishList = async () => {
+    try {
+      const createOrRemoveWishList = await createOrDeleteWishList(id);
+      console.log(createOrRemoveWishList);
+      if (createOrRemoveWishList.data === 1) {
+        alert("Remove Wishlist");
+      } else {
+        alert("Create Wishlist");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const checkWishList = async () => {
+    const result = await fetchWishListByProductId(id);
+    const resArr = result.data.map((el) => {
+      return { carsId: el.carsId, userId: el.userId };
+    });
+    console.log(resArr, result);
+    if (resArr[0].carsId == id && resArr[0].userId == user.id) {
+      setCheckFav(true);
+    }
+  };
+  console.log(checkFav);
 
   const deleteProductById = async () => {
     const deleteColumn = await deleteProduct(id);
@@ -14,8 +45,8 @@ export default function Product() {
 
   useEffect(() => {
     getProductByNumber(id);
+    checkWishList(id);
   }, []);
-  // console.log(fetchProduct);
   const { Images } = fetchProduct;
   return (
     <div className="m-8">
@@ -39,29 +70,57 @@ export default function Product() {
         </div>
       </div>
       <div className="flex justify-end mr-20 mb-4 gap-2">
-        <Link to={`/editProduct/${fetchProduct.id}`}>
-          <a
-            className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
-            href="/editProduct"
-          >
-            Edit
-          </a>
-        </Link>
+        {checkFav ? (
+          <Link to={`/userProfile/${user?.id}`}>
+            <button
+              className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
+              onClick={addWishList}
+            >
+              This in your Wishlist
+            </button>
+          </Link>
+        ) : (
+          <Link to={`/userProfile/${user?.id}`}>
+            <button
+              className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
+              onClick={addWishList}
+            >
+              Favorite
+            </button>
+          </Link>
+        )}
+
         <a
           className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
           href="/"
         >
           Home
         </a>
-        <Link to="/">
-          <button
-            className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
-            type="button"
-            onClick={deleteProductById}
-          >
-            Delete
-          </button>
-        </Link>
+        {user?.isAdmin ? (
+          <Link to={`/editProduct/${fetchProduct.id}`}>
+            <a
+              className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
+              href="/editProduct"
+            >
+              Edit
+            </a>
+          </Link>
+        ) : (
+          <div></div>
+        )}
+        {user?.isAdmin ? (
+          <Link to="/">
+            <button
+              className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
+              type="button"
+              onClick={deleteProductById}
+            >
+              Delete
+            </button>
+          </Link>
+        ) : (
+          <div></div>
+        )}
       </div>
     </div>
   );

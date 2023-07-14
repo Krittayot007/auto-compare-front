@@ -22,8 +22,9 @@ export default function AuthContextProvider(props) {
   const logout = () => {
     localStorage.removeItem("accessToken");
     setUser(null);
+    window.location.reload(false);
   };
-  console.log("last", user);
+  // console.log("last", user);
   return (
     <AuthContext.Provider value={{ user, setUser, logout }}>
       {props.children}

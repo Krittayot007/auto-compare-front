@@ -3,6 +3,7 @@ import { useAuth } from "../hooks/useAuth";
 
 export function Navebar() {
   const { user, logout } = useAuth();
+  // console.log("userprofile", user);
 
   return (
     <header className="shadow-sm">
@@ -91,11 +92,15 @@ export function Navebar() {
           aria-label="Global"
           className="hidden items-center justify-center gap-8 text-sm font-medium lg:flex lg:w-0 lg:flex-1"
         >
-          <Link to="/addProduct">
-            <button className="text-gray-900" type="button">
-              Addproduct
-            </button>
-          </Link>
+          {user?.isAdmin ? (
+            <Link to="/addProduct">
+              <button className="text-gray-900" type="button">
+                Addproduct
+              </button>
+            </Link>
+          ) : (
+            <div></div>
+          )}
           <a className="text-gray-900" href="">
             About Us
           </a>
@@ -107,9 +112,11 @@ export function Navebar() {
         <div className="hidden items-center gap-4 lg:flex">
           {user ? (
             <>
-              <div className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500">
-                {user?.firstName}
-              </div>
+              <Link to={`/userProfile/${user.id}`}>
+                <div className="inline-block rounded border border-current px-4 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500">
+                  {user?.firstName}
+                </div>
+              </Link>
               <Link to="/">
                 <button
                   type="button"
